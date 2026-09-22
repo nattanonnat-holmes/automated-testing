@@ -46,7 +46,7 @@ export class TodoPage extends BasePage {
   async removeTodo(title: string): Promise<void> {
     const todo = this.todoItems.filter({ hasText: title });
     await todo.hover();
-    await todo.getByRole('button', { name: /delete|destroy/i }).click();
+    await todo.locator('.destroy').click();
   }
 
   async editTodo(oldTitle: string, newTitle: string): Promise<void> {
