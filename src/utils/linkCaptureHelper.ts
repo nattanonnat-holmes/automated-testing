@@ -127,11 +127,18 @@ export async function locateAndCaptureLink(
     htmlEl.style.outline = `4px solid ${color}`;
     htmlEl.style.outlineOffset = '3px';
     htmlEl.style.boxShadow = `0 0 16px ${color}`;
-    htmlEl.style.transition = 'all 0.2s ease-in-out';
+    htmlEl.style.transition = 'none';
   }, highlightColor);
 
-  // Allow short animation/render frame
-  await page.waitForTimeout(200);
+  // Pause carousel/CSS transitions to ensure stability across all browsers (including WebKit)
+  await page.evaluate(() => {
+    document.querySelectorAll('.bottomjCarouselLite, #BannerBTN, ul, li').forEach((el) => {
+      (el as HTMLElement).style.animation = 'none';
+      (el as HTMLElement).style.transition = 'none';
+    });
+  }).catch(() => {});
+
+  await page.waitForTimeout(100);
 
   // 6. Generate unique filenames
   const timestamp = Date.now();
@@ -142,10 +149,12 @@ export async function locateAndCaptureLink(
 
   // 7. Capture:
   // a) Element capture: captures precisely the clickable button/link
-  await linkLocator.screenshot({ path: elementScreenshotPath });
+  await linkLocator.screenshot({ path: elementScreenshotPath, animations: 'disabled', timeout: 10_000 }).catch(async () => {
+    await linkLocator.screenshot({ path: elementScreenshotPath }).catch(() => {});
+  });
 
   // b) Context capture: captures the full viewport showing where the link is on the page
-  await page.screenshot({ path: contextScreenshotPath, fullPage: false });
+  await page.screenshot({ path: contextScreenshotPath, fullPage: false, animations: 'disabled' });
 
   // 8. Attach screenshots to test report if testInfo is provided
   if (testInfo) {
