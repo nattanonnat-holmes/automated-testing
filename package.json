@@ -8,6 +8,7 @@
     "test:e2e": "playwright test --project=chromium --project=webkit",
     "test:e2e:all": "playwright test --project=chromium --project=firefox --project=webkit",
     "test:api": "playwright test --project=api",
+    "test:smoke": "playwright test --grep @smoke",
     "test:headed": "playwright test --project=chromium --headed",
     "test:ui": "playwright test --ui",
     "test:debug": "playwright test --debug",
