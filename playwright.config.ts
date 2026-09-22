@@ -50,6 +50,9 @@ export default defineConfig({
 
     /* Headless mode */
     headless: process.env.HEADLESS !== 'false',
+
+    /* Ignore HTTPS certificate errors (e.g. for internal/gov sites) */
+    ignoreHTTPSErrors: true,
   },
 
   /* Configure projects for major browsers */

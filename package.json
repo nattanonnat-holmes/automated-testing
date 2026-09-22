@@ -13,6 +13,7 @@
     "test:webkit": "playwright test --project=webkit",
     "test:mobile": "playwright test --project=\"Mobile Chrome\" --project=\"Mobile Safari\"",
     "test:e2e": "playwright test tests/e2e",
+    "test:link": "playwright test tests/e2e/link-capture.spec.ts",
     "test:api": "playwright test tests/api",
     "test:report": "playwright show-report",
     "codegen": "playwright codegen"
