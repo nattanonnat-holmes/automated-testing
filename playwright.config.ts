@@ -40,13 +40,11 @@ export default defineConfig({
       use: { ...devices['Desktop Safari'] },
     },
     ...(isCI || process.env.ENABLE_FIREFOX === 'true'
-      ? [
-          {
-            name: 'firefox',
-            testIgnore: /.*\/api\/.*/,
-            use: { ...devices['Desktop Firefox'] },
-          },
-        ]
+      ? [{
+          name: 'firefox',
+          testIgnore: /.*\/api\/.*/,
+          use: { ...devices['Desktop Firefox'] },
+        }]
       : []),
     {
       name: 'Mobile Chrome',
@@ -66,4 +64,5 @@ export default defineConfig({
       },
     },
   ],
+  webServer: undefined,
 });
