@@ -16,7 +16,7 @@ export class TodoPage extends BasePage {
     super(page);
     this.newTodoInput = page.getByPlaceholder('What needs to be done?');
     this.todoItems = page.locator('.todo-list li');
-    this.todoTitles = this.todoItems.getByRole('label');
+    this.todoTitles = this.todoItems.locator('label');
     this.todoCount = page.locator('.todo-count');
     this.toggleAllCheckbox = page.getByLabel('Mark all as complete');
     this.clearCompletedButton = page.getByRole('button', { name: 'Clear completed' });
@@ -51,7 +51,7 @@ export class TodoPage extends BasePage {
 
   async editTodo(oldTitle: string, newTitle: string): Promise<void> {
     const todo = this.todoItems.filter({ hasText: oldTitle });
-    await todo.getByRole('label').dblclick();
+    await todo.locator('label').dblclick();
     const editInput = todo.getByRole('textbox');
     await editInput.fill(newTitle);
     await editInput.press('Enter');
