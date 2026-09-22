@@ -15,8 +15,10 @@
     "test:chromium": "playwright test --project=chromium",
     "test:firefox": "ENABLE_FIREFOX=true playwright test --project=firefox",
     "test:webkit": "playwright test --project=webkit",
-    "test:mobile": "playwright test --project="Mobile Chrome" --project="Mobile Safari"",
+    "test:mobile": "playwright test --project=\"Mobile Chrome\" --project=\"Mobile Safari\"",
     "test:typecheck": "tsc --noEmit",
+    "test:link": "playwright test tests/e2e/link-capture.spec.ts",
+    "test:nav": "playwright test tests/e2e/tc-nav-001.spec.ts",
     "test:report": "playwright show-report",
     "codegen": "playwright codegen"
   },

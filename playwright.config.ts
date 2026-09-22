@@ -27,6 +27,9 @@ export default defineConfig({
     screenshot: 'only-on-failure',
     video: 'retain-on-failure',
     headless: process.env.HEADLESS !== 'false',
+
+    /* Ignore HTTPS certificate errors (e.g. for internal/gov sites) */
+    ignoreHTTPSErrors: true,
   },
   projects: [
     {
